@@ -1,12 +1,26 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../auth/authContext";
+import { types } from "../../types/types";
 
 
 export const LoginScreen = () => {
 
+  const { dispatch } = useContext( AuthContext );
+
   const navigate = useNavigate();
 
+  const path = localStorage.getItem('lastPath') || '/marvel';
+
   const handleLogin = () => {
-    navigate('/marvel', {
+    dispatch({
+      type: types.login,
+      payload: {
+          name: 'Valentino Vespuci',
+          email: 'var@gmail.com'
+      }
+    });
+    navigate( path, {
       replace: true
     });
   }
