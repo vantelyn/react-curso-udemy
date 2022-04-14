@@ -9,10 +9,9 @@ export const LoginScreen = () => {
   const { dispatch } = useContext( AuthContext );
 
   const navigate = useNavigate();
-
-  const path = localStorage.getItem('lastPath') || '/marvel';
-
+  
   const handleLogin = () => {
+    const path = localStorage.getItem('lastPath') || '/marvel';
     dispatch({
       type: types.login,
       payload: {
@@ -32,7 +31,7 @@ export const LoginScreen = () => {
 
       <button
         className="btn btn-primary"
-        onClick={handleLogin}
+        onClick={ handleLogin }
       >
         Login
       </button>

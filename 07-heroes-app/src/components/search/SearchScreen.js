@@ -13,18 +13,18 @@ export const SearchScreen = () => {
 
   const { q = '' } = queryString.parse(location.search);
 
-  const [ { searchText }, handleInputChange ] = useForm( { searchText: q } );
+  const [{ searchText }, handleInputChange] = useForm({ searchText: q });
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`?q=${ searchText }`);
+    navigate(`?q=${searchText}`);
   }
 
-  const heroesFound = useMemo (
-    ()=>getHeroesByName( q ),
-    [ q ] 
+  const heroesFound = useMemo(
+    () => getHeroesByName(q),
+    [q]
   );
-  
+
 
   return (
     <>
@@ -37,19 +37,19 @@ export const SearchScreen = () => {
           <hr />
 
           <form
-            onSubmit={ handleSearch }
+            onSubmit={handleSearch}
           >
-            <input 
+            <input
               type="text"
               placeholder="Buscar un heroe"
               className="form-control"
               name="searchText"
               autoComplete="off"
-              value={ searchText }
-              onChange={ handleInputChange }
+              value={searchText}
+              onChange={handleInputChange}
             />
             <button
-            className="btn btn-outline-primary mt-1"
+              className="btn btn-outline-primary mt-1"
               type="submit"
             >
               Buscar...
@@ -65,12 +65,12 @@ export const SearchScreen = () => {
           {
             (q === '' && <p className="alert-danger p-2">Ningún nombre introducido</p>)
           }
-          {            
+          {
             (q !== '' && heroesFound.length === 0 && <p className="alert-info p-2">Sin resultados</p>)
           }
 
           {
-            heroesFound.map( hero => (
+            heroesFound.map(hero => (
               <HeroCard
                 key={hero.id}
                 {...hero}

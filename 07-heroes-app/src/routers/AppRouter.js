@@ -20,7 +20,7 @@ export const AppRouter = () => {
               } 
             />
 
-            <Route 
+            <Route
               path="/*" 
               element={ 
                 <PrivateRoute>
