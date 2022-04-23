@@ -1,14 +1,12 @@
-import { Provider } from "react-redux"
-
-import { store } from "./redux/store/store"
-import { AppRouter } from "./components/routers/AppRouter"
+import { Provider } from "react-redux";
+import { store } from './context';
+import { AppRouter } from "./routers/AppRouter";
 
 export const CalendarApp = () => {
+
   return (
-    <div>
-      <Provider store={ store }>
-        <AppRouter />
-      </Provider>
-    </div>
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   )
 }
