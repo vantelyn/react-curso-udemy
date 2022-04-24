@@ -1,19 +1,18 @@
-const { compareSync, genSaltSync, hashSync } = require("bcryptjs");
-const { request, response } = require("express");
-const { verify } = require("jsonwebtoken");
-const { dbModels } = require("../../database");
-const { authErrorTypes } = require("./_authHelpers");
-const { generarJWT } = require("./_authHelpers");
+const { compareSync, genSaltSync, hashSync } = require( "bcryptjs" );
+const { request, response } = require( "express" );
+const { verify } = require( "jsonwebtoken" );
+const { dbModels:{ Usuario } } = require( "../../database" );
+const { authErrorTypes, authGenToken } = require( "./_authHelpers" );
 
 const controlLogin = async ( req = request, res = response, next  ) => {
 
     const { email, password } = req.body;
     
     try {
-        const user = await dbModels.Usuario.findOne({ email })
+        const user = await Usuario.findOne({ email })
 
         if ( user && compareSync( password, user.password ) ){
-            req.token = await generarJWT( user.id, user.name );
+            req.token = await authGenToken( user.id, user.name );
         } else {
             ( !req.errType ) && ( req.errType = authErrorTypes.badLogin );
         } 
@@ -40,14 +39,14 @@ const controlNewUser = async ( req = request, res = response, next ) => {
             ( !req.errType ) && ( req.errType = authErrorTypes.userAlreadyExists );
         } else {             
             // Crear nuevo usuario
-            user = new dbModels.Usuario(req.body);
+            user = new Usuario(req.body);
             // Encriptar contraseña
             const salt = genSaltSync();
             user.password = hashSync( password, salt );
             // Guardar usuario
             await user.save();
             //  Adjuntar JWT al request
-            req.token = await generarJWT( user.id, user.name );            
+            req.token = await authGenToken( user.id, user.name );            
         }
     } catch ( err ) {
         console.log( err );
@@ -64,7 +63,7 @@ const controlRenewToken = async (req = request, res = response, next) => {
 
     try {
         const { uid, name } = verify(token, secretKey, {});
-        req.token = await generarJWT( uid, name );
+        req.token = await authGenToken( uid, name );
     } catch (error) {
         console.log(error);
         (!token)

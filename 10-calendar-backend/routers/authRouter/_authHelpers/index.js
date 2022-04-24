@@ -1,6 +1,6 @@
 module.exports = {
     authErrorTypes: require('./_authErrorTypes'),
-    checkForErrors: require('./_checkForErrors'),
+    authCheckErrors: require('./_authCheckErrors'),
     authReturn: require('./_authReturn'),
-    generarJWT: require('./_generarJWT')
+    authGenToken: require('./_authGenToken')
 };
