@@ -1,52 +1,51 @@
 import { useState } from 'react';
+import { actions, useDispatch, useSelector } from '../../context';
+
 import { Calendar, momentLocalizer } from 'react-big-calendar'
-import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment'
-import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { Navbar } from "../ui/Navbar"
+import moment from 'moment'
+import 'moment/locale/es';
+
 import { messages } from '../../helpers/calendar-messages-es';
 
-import { CalendarEvent } from './CalendarEvent';
-import { CalendarModal } from './CalendarModal';
-import { uiOpenModal } from '../../redux/actions/uiActions';
-import { eventClearActive, eventSetActive } from '../../redux/actions/eventsActions';
-import { AddNewFab } from '../ui/AddNewFab';
-import { DeleteEventFab } from '../ui/DeleteEventFab';
+import { CalendarEvent } from './_CalendarEvent';
+import { CalendarModal } from './_CalendarModal';
 
 moment.locale('es');
 
 const localizer = momentLocalizer(moment);
 
+
 export const CalendarScreen = () => {
 
-  const { events, activeEvent } = useSelector( state => state.calendar );  
   const dispatch = useDispatch();
+  
+  const { events } = useSelector( state=> state.calendar );
 
   const [lastView, setLastView] = useState( localStorage.getItem('lastView') || 'month' )
 
   const onDoubleClick = (e) => {
-    dispatch( uiOpenModal() );
+    dispatch( actions.uiOpenModal() );
   }
   
   const onSelectEvent = (e) => {
-    dispatch( eventSetActive( e ) );
+    dispatch( actions.eventSetActive( e ) );
   }
+  
+  const onSelectSlot = (e) => {
+    dispatch( actions.eventClearActive() )
+  }
+  
   const onViewChange = (e) => {
     setLastView(e);
     localStorage.setItem('lastView', e);
   }
 
-  const onSelectSlot = (e) => {
-    // console.log(e)
-    dispatch( eventClearActive() )
-  }
-
   const eventStyleGetter = (event, start, end, isSelected) => {
 
     const style = {
-      backgroundColor: '#367CF7',
+      backgroundColor: '#367CAA',
       borderRadius: '0px',
       opacity: 0.8,
       display: 'block',
@@ -60,7 +59,7 @@ export const CalendarScreen = () => {
 
   return (
     <div className='calendar-screen'>
-      <Navbar />
+      
       <Calendar
         localizer={ localizer }
         events={ events }
@@ -79,10 +78,7 @@ export const CalendarScreen = () => {
           event: CalendarEvent
         }}
       />
-      <AddNewFab />
-      {
-        (activeEvent) && <DeleteEventFab />
-      }
+
       <CalendarModal />
     </div>
   )

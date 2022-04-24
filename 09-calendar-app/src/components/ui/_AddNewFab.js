@@ -1,12 +1,11 @@
-import { useDispatch } from "react-redux";
-import { uiOpenModal } from "../../redux/actions/uiActions";
+import { actions, useDispatch } from "../../context";
 
 export const AddNewFab = () => {
 
     const dispatch = useDispatch();
 
     const handleClickNew = () => {
-        dispatch( uiOpenModal() );
+        dispatch( actions.uiOpenModal() );
     }
 
     return (

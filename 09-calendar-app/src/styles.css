@@ -3,12 +3,6 @@ html, body {
     width: 100vw;
 }
 .calendar-screen {
-    display: flex;
-    flex-flow: column;
-    height: 100vh;
-}
-
-.rbc-calendar {
     height: 100%;
 }
 
@@ -81,4 +75,10 @@ html, body {
     position: fixed;
     left: 25px;
     z-index: 5;
+}
+
+#root{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
