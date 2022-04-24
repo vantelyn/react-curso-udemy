@@ -23,7 +23,4 @@ const generarJWT = ( uid, name ) => {
     } )
 }
 
-
-module.exports = {
-    generarJWT
-};
+module.exports = generarJWT;

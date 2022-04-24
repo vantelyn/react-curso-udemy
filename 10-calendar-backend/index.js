@@ -1,14 +1,14 @@
 const express = require('express');
 const cors = require('cors')
 require('dotenv').config();
-const { dbConnection } = require('./database/config');
-const routerAuth = require('./routes/auth')
+const { dbConnect } = require('./database');
+const { authRouter } = require('./routers');
 
 // Crear el servidor de express
 const app = express();
 
 // Base de datos
-dbConnection();
+dbConnect();
 
 // CORS
 app.use(cors())
@@ -20,7 +20,7 @@ app.use( express.static('./public') );
 app.use( express.json() );
 
 // Rutas
-app.use( '/api/auth', routerAuth );
+app.use( '/api/auth', authRouter );
 // !TODO: CRUD: Eventos  
 
 
