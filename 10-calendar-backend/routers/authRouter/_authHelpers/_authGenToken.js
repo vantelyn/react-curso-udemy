@@ -1,26 +1,20 @@
 const { sign } = require("jsonwebtoken");
 
 const authGenToken = ( uid, name ) => {
-    return new Promise( ( resolve, reject ) => {
-
+    return new Promise( (resolve, reject) => {
         const payload = { uid, name };
         const privateKey = process.env.SECRET_JWT_SEED;
         const options = {
             expiresIn: '2h'
         };
-        const callBack = ( err, token ) => {
 
-            if ( err ) {
-                console.log( err )
-                reject( 'No se pudo generar el token' )
-            }
-
+        try {
+            token = sign(payload, privateKey, options);
             resolve( token );
+        } catch (err) {
+            reject( err );
         }
-
-        sign( payload, privateKey, options, callBack )
-
-    } )
+    })
 }
 
 module.exports = authGenToken;

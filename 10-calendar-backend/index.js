@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors')
 require('dotenv').config();
 const { dbConnect } = require('./database');
-const { authRouter } = require('./routers');
+const { authRouter, eventsRouter } = require('./routers');
+const { injectResponder, catchBodyParseErrors } = require('./middlewares');
 
 // Crear el servidor de express
 const app = express();
@@ -11,17 +12,21 @@ const app = express();
 dbConnect();
 
 // CORS
-app.use(cors())
+app.use( cors() );
+
+// Habilita respuestas llamando objetos JSON
+app.use( injectResponder );
 
 // Directorio Público
 app.use( express.static('./public') );
 
 // Lectura y parseo del body
-app.use( express.json() );
+app.use( express.json( ) );
+app.use( catchBodyParseErrors );
 
 // Rutas
 app.use( '/api/auth', authRouter );
-// !TODO: CRUD: Eventos  
+app.use( '/api/events', eventsRouter );
 
 
 

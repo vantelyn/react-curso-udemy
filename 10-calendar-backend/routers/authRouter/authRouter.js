@@ -1,17 +1,18 @@
-/* 
-    Rutas de Usuarios / Auth
-    host + /api/auth
-*/
-
 const { Router } = require('express');
-const { authReturn } = require('./_authHelpers');
 
-const { validateLogin, validateNewUser, validateToken } = require('./_authValidators');
+const { 
+    validateLogin,
+    validateNewUser,
+    validateToken 
+} = require('./_authController');
 
 const authRouter = Router();
-
-authRouter.post( '/', validateLogin, authReturn );
-authRouter.post( '/new', validateNewUser, authReturn );
-authRouter.get( '/renew', validateToken , authReturn );
+/* 
+    Routes
+    /api/auth
+*/
+authRouter.post( '/', validateLogin );
+authRouter.post( '/new', validateNewUser );
+authRouter.get( '/renew', validateToken );
 
 module.exports = authRouter;
