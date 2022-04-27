@@ -6,7 +6,7 @@ const {
     checkUserCredentials, 
     checkIfUserAlreadyExists, 
     userLogin, 
-    createNewUSer,
+    createNewUser,
     checkTokenAndSaveUser,
     renewToken,
 } = require('./_authValidators');
@@ -27,7 +27,7 @@ const validateNewUser = [
     checkFormErrors,
     checkUserByEmail,
     checkIfUserAlreadyExists,
-    createNewUSer
+    createNewUser
 ];
 
 const validateToken = [ 

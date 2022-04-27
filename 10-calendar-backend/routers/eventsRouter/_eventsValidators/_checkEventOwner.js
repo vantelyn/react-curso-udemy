@@ -1,9 +1,8 @@
 const { returnTypes } = require("../_eventsHelpers");
 
-const checkEventOwner = ( { eventToModify }, { respond }, next) => {
-    if ( eventToModify.user.toString() !== req.uid )
+const checkEventOwner = ( { eventToModify, uid }, { respond }, next) => {
+    if ( eventToModify?.user.toString() !== uid )
         return respond( returnTypes.youHaveNoRightBitch );
-
     next();
 }
 

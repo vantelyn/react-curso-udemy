@@ -5,7 +5,7 @@ const checkUserCredentials = async (req = request, { respond }, next) => {
     const user = req.user;
     const { password } = req.body;
 
-    if ( !compareSync( password, user?.password ) )
+    if ( !user || !compareSync( password, user?.password ) )
         return respond( returnTypes.badUserCredentials );
 
     next();

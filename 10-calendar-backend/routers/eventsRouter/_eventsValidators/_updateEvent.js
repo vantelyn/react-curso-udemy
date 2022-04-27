@@ -1,6 +1,6 @@
 const { request, response } = require("express");
 const { Event } = require("../../../database/_dbModels");
-const { eventsMsgTypes } = require("../_eventsHelpers");
+const { returnTypes } = require("../_eventsHelpers");
 /* 
     Must go after eventsfindEventByProvidedId
 */
@@ -12,11 +12,11 @@ const updateEvent = async (req = request, { respond }) => {
     }
 
     try {
-        modifiedEvent = await Event.findByIdAndUpdate( eventId, modifiedEvent );
-        return respond( eventsMsgTypes.eventUpdated( modifiedEvent ) ) ;
+        modifiedEvent = await Event.findByIdAndUpdate( eventId, modifiedEvent, {new:true} );
+        return respond( returnTypes.eventUpdated( modifiedEvent ) ) ;
     } catch ( err ) {
         console.log( err );
-        return respond( eventsMsgTypes.internalServerError );
+        return respond( returnTypes.internalServerError );
     } 
 }
 

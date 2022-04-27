@@ -9,10 +9,10 @@ const eliminateEvent = async (req = request, { respond }) => {
     const eventId = req.params.id;
 
     try {
-        await Event.findByIdAndDelete(eventId, req.eventToModify);
+        await Event.findByIdAndDelete( eventId );
         return respond( returnTypes.eventDeleted );
-    } catch (error) {
-        console.log(err);
+    } catch ( err ) {
+        console.log( err );
         return respond( returnTypes.internalServerError );
     }
 }

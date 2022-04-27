@@ -3,7 +3,7 @@ const { genSaltSync, hashSync } = require( "bcryptjs" );
 const { Usuario } = require("../../../database/_dbModels");
 const { returnTypes, authGenToken } = require("../_authHelpers");
 
-const createNewUSer = async ( req = request, { respond } ) => {
+const createNewUser = async ( req = request, { respond } ) => {
     const user = new Usuario( req.body ); 
 
     const salt = genSaltSync();
@@ -19,4 +19,4 @@ const createNewUSer = async ( req = request, { respond } ) => {
     }
 }
 
-module.exports = createNewUSer;
+module.exports = createNewUser;

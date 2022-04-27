@@ -24,16 +24,19 @@ const controlCreateNewEvent = [
 ];
 
 const controlUpdateEvent = [
-    checkEventByProvidedId,
-    checkEventOwner,
+    check('id','Id is not valid').isMongoId(),
     check("title", "El título es obligatorio").not().isEmpty(),
     check("start", "No es una fecha válida").custom( isValidDate ),
     check("end", "No es una fecha válida").custom( isValidDate ),
     checkFormErrors,
+    checkEventByProvidedId,
+    checkEventOwner,
     updateEvent,
 ];
 
 const controlEliminateEvent = [
+    check('id','Id is not valid').isMongoId(),
+    checkFormErrors,
     checkEventByProvidedId,
     checkEventOwner,
     eliminateEvent,

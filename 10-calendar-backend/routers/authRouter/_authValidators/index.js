@@ -5,6 +5,6 @@ module.exports = {
     checkIfUserAlreadyExists: require('./_checkIfUserAlreadyExists'),
     checkTokenAndSaveUser: require('./_checkTokenAndSaveUser'),
     userLogin: require('./_loginUser'),
-    createNewUSer: require('./_createNewUser'),
+    createNewUser: require('./_createNewUser'),
     renewToken: require('./_renewToken'),
 };
