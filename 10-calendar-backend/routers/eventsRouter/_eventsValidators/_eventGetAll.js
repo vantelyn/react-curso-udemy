@@ -6,7 +6,7 @@ const eventGetAll = async (req = request, { respond } = response) => {
 
     try {
         const eventsFound = await Event.find().populate('user', 'name');
-        return respond( returnTypes.getAllEvents( eventsFound ) );
+        return respond( returnTypes.eventGetAll( eventsFound ) );
     } catch ( err ) {
         console.log( err )
         return respond( returnTypes.internalServerError );

@@ -1,5 +1,5 @@
 const returnTypes = {
-    getAllEvents: ( events ) => ({
+    eventGetAll: ( events ) => ({
         status: 200,
         payload: {
             ok: true,
@@ -23,14 +23,6 @@ const returnTypes = {
             event
         }
     }),
-    foundErrors: ( errors ) => ({
-        status: 400,
-        payload: {
-            ok: false,
-            msg: 'The system found some errors',
-            errors
-        }
-    }),
     eventDeleted: {
         status: 200,
         payload: {
@@ -38,6 +30,32 @@ const returnTypes = {
             msg: 'Event deleted'
         }
     },    
+    eventNotFound:{
+        status: 404,
+        payload: {
+            ok: false,
+            msg: 'Event not found'
+        }
+    },
+    eventNotOwned:{
+        status: 401,
+        payload: {
+            ok: false,
+            msg: 'Events can only be modified by owner'
+        }
+    },
+
+
+
+    formErrors: ( errors ) => ({
+        status: 400,
+        payload: {
+            ok: false,
+            msg: 'The system found some errors',
+            errors
+        }
+    }),
+        
     invalidToken: {
         status: 401,
         payload: {
@@ -52,20 +70,7 @@ const returnTypes = {
             msg: 'Internal Server error'
         }        
     },
-    eventNotFound:{
-        status: 404,
-        payload: {
-            ok: false,
-            msg: 'Event not found'
-        }
-    },
-    youHaveNoRightBitch:{
-        status: 401,
-        payload: {
-            ok: false,
-            msg: 'Events can only be modified by owner'
-        }
-    }
+    
 }
 
 module.exports = returnTypes;

@@ -19,11 +19,11 @@ const findEventById = async ( req = request, { respond }, next ) => {
 const checkEventOwner = ( req = request, { respond }, next) => {
     const { user } = req.eventToModify;
     if ( !user.equals( req.user.id )  )
-        return respond( returnTypes.youHaveNoRightBitch );
+        return respond( returnTypes.eventNotOwned );
     next();
 }
 
-const eventDelete = async (req = request, { respond } ) => {
+const deleteEvent = async (req = request, { respond } ) => {
     const { id } = req.eventToModify;
     try {
         await Event.findByIdAndDelete( id );
@@ -34,4 +34,4 @@ const eventDelete = async (req = request, { respond } ) => {
     }
 }
 
-module.exports = [findEventById, checkEventOwner, eventDelete];
+module.exports = [findEventById, checkEventOwner, deleteEvent];

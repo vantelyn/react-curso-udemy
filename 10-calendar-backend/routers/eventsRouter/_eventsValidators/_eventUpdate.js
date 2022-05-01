@@ -20,7 +20,7 @@ const findEventById = async ( req = request, { respond }, next ) => {
 const checkEventOwner = ( req = request, { respond }, next) => {
     const { user } = req.eventToModify;
     if ( !user.equals( req.user.id )  )
-        return respond( returnTypes.youHaveNoRightBitch );
+        return respond( returnTypes.eventNotOwned );
     next();
 }
 
