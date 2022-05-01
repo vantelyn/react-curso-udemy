@@ -1,13 +1,6 @@
-const returnTypes = {
-    foundErrors: (errors) => ({
-        status: 400,
-        payload: {
-            ok: false,
-            msg: 'Bad Request',
-            errors
-        }
-    }),
-    userLogin: ( token, user ) => ({
+const authReturnTypes = {
+
+    userLogin: (token, user) => ({
         status: 202,
         payload: {
             ok: true,
@@ -24,13 +17,6 @@ const returnTypes = {
             token
         }
     }),
-    invalidToken: {
-        status: 401,
-        payload: {
-            ok: false,
-            msg: 'Invalid Token'
-        }
-    },
     userAlreadyExists: {
         status: 400,
         payload: {
@@ -38,14 +24,7 @@ const returnTypes = {
             msg: 'User already exists'
         }
     },
-    internalServerError: {
-        status: 500,
-        payload: {
-            ok: false,
-            msg: 'Internal Server error'
-        }
-    },
-    badUserCredentials: {
+    userBadCredentials: {
         status: 401,
         payload: {
             ok: false,
@@ -59,6 +38,6 @@ const returnTypes = {
             msg: 'User Banned'
         }
     },
-}
+};
 
-module.exports = returnTypes;
+module.exports = authReturnTypes;

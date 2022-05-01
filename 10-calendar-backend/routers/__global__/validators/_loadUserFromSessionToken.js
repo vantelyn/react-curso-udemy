@@ -1,6 +1,6 @@
 const { request } = require("express");
 const { User } = require("../../../database");
-const { returnTypes, verifySessionToken } = require("../_eventsHelpers");
+const { verifySessionToken, returnTypes } = require("../helpers");
 
 const checkSessionTokenAndExtractUserId = (req = request, { respond }, next) => {
     const sessionToken = req.header('s-token');
@@ -29,4 +29,11 @@ const findUserById = async (req = request, { respond }, next) => {
     next();
 }
 
-module.exports = [checkSessionTokenAndExtractUserId, findUserById];
+const checkIfUserIsBanned = ( req = request, { respond }, next ) => {
+    const user = req.user;
+    if( user.banned )
+        return respond( returnTypes.userBanned );
+    next();
+}
+
+module.exports = [ checkSessionTokenAndExtractUserId, findUserById, checkIfUserIsBanned ];

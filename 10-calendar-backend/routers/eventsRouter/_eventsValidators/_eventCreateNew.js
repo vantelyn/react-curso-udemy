@@ -1,6 +1,6 @@
 const { request } = require("express");
 const { Event } = require("../../../database");
-const { returnTypes } = require("../_eventsHelpers");
+const { returnTypes } = require("../../__global__/helpers");
 
 const eventCreateNew = async (req = request, { respond } ) => {
     let newEvent = new Event({

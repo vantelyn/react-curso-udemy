@@ -1,4 +1,4 @@
-const returnTypes = {
+const eventsReturnTypes = {
     eventGetAll: ( events ) => ({
         status: 200,
         payload: {
@@ -44,33 +44,6 @@ const returnTypes = {
             msg: 'Events can only be modified by owner'
         }
     },
+};
 
-
-
-    formErrors: ( errors ) => ({
-        status: 400,
-        payload: {
-            ok: false,
-            msg: 'The system found some errors',
-            errors
-        }
-    }),
-        
-    invalidToken: {
-        status: 401,
-        payload: {
-            ok: false,
-            msg: 'Invalid token'
-        }        
-    },
-    internalServerError: {
-        status: 500,
-        payload: {
-            ok: false,
-            msg: 'Internal Server error'
-        }        
-    },
-    
-}
-
-module.exports = returnTypes;
+module.exports = eventsReturnTypes;

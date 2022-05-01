@@ -1,6 +1,7 @@
 const { compareSync } = require("bcryptjs");
+const { request } = require("express");
 const { User } = require("../../../database");
-const { returnTypes } = require("../_authHelpers");
+const { returnTypes } = require("../../__global__/helpers");
 
 const loadUserFromEmailAndPassword = async (req = request, { respond }, next) => {
     const { email, password } = req.body;
@@ -9,7 +10,7 @@ const loadUserFromEmailAndPassword = async (req = request, { respond }, next) =>
         const user = await User.findOne({ email });
 
         if (!user || !compareSync(password, user?.password))
-            return respond(returnTypes.badUserCredentials);
+            return respond(returnTypes.userBadCredentials);
 
         req.user = user.info();        
     } catch (err) {

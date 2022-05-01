@@ -1,12 +1,11 @@
 const { check } = require('express-validator');
 
-const { 
-    checkFormErrors,
+const { checkFormErrors, loadUserFromSessionToken } = require('../__global__/validators');
+const {
     userLogin,
     loadUserFromNewUser,
     loadUserFromEmailAndPassword,
-    loadUserFromGoogleToken,
-    loadUserFromSessionToken
+    loadUserFromGoogleToken 
 } = require('./_authValidators');
 
 const controlLoginWithNewUser = [

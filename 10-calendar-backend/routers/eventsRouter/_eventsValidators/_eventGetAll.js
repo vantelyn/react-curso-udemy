@@ -1,8 +1,8 @@
-const { request, response } = require("express");
+const { request } = require("express");
 const { Event } = require("../../../database");
-const { returnTypes } = require("../_eventsHelpers");
+const { returnTypes } = require("../../__global__/helpers");
 
-const eventGetAll = async (req = request, { respond } = response) => {
+const eventGetAll = async (req = request, { respond }) => {
 
     try {
         const eventsFound = await Event.find().populate('user', 'name');

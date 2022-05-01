@@ -1,6 +1,6 @@
 const { request } = require("express");
 const { Event } = require("../../../database");
-const { returnTypes } = require("../_eventsHelpers");
+const { returnTypes } = require("../../__global__/helpers");
 
 const findEventById = async ( req = request, { respond }, next ) => {
     const eventId = req.params.id;

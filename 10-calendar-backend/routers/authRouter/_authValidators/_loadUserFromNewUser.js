@@ -1,7 +1,7 @@
 const { request } = require("express");
 const { genSaltSync, hashSync } = require("bcryptjs");
 const { User } = require("../../../database");
-const { returnTypes } = require("../_authHelpers");
+const { returnTypes } = require("../../__global__/helpers");
 
 const checkIfUserAlreadyExists = async (req = request, { respond }, next) => {
     const { email } = req.body;

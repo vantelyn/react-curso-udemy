@@ -1,7 +1,8 @@
 const { request } = require("express");
-const { returnTypes, generateSessionToken } = require("../_authHelpers");
+const { returnTypes } = require("../../__global__/helpers");
+const { generateSessionToken } = require("../_authHelpers");
 
-const checkUserBanned = ( req = request, { respond }, next ) => {
+const checkIfUserIsBanned = ( req = request, { respond }, next ) => {
     const user = req.user;
     if( user.banned )
         return respond( returnTypes.userBanned );
@@ -19,4 +20,4 @@ const userLogin = async ( req = request, { respond } ) => {
     }
 }
 
-module.exports = [ checkUserBanned, userLogin ];
+module.exports = [ checkIfUserIsBanned, userLogin ];

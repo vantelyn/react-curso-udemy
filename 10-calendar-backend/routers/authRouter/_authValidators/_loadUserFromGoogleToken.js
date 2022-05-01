@@ -1,6 +1,7 @@
 const { request } = require("express");
 const { User } = require("../../../database");
-const { verifyGoogleToken, returnTypes } = require("../_authHelpers");
+const { returnTypes } = require("../../__global__/helpers");
+const { verifyGoogleToken } = require("../_authHelpers");
 
 const checkGoogleToken = async ( req = request, { respond }, next ) => {
     const googleToken = req.header('g-token');

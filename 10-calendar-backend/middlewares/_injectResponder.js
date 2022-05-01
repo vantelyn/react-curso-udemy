@@ -1,8 +1,8 @@
 const { response } = require("express");
 
 const injectResponder = ( req, res = response, next ) => {
-    res.respond = ( responseType ) => {
-        res.status( responseType.status ).json( responseType.payload );
+    res.respond = ( returnType ) => {
+        res.status( returnType.status ).json( returnType.payload );
     }
     next();
 }

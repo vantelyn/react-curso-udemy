@@ -1,8 +1,7 @@
 const { check } = require("express-validator");
 const { isValidDate } = require("./_eventsHelpers");
+const { checkFormErrors, loadUserFromSessionToken } = require("../__global__/validators");
 const {
-    checkFormErrors,
-    loadUserFromSessionToken,
     eventCreateNew,
     eventUpdate,
     eventDelete,
