@@ -1,5 +1,6 @@
 module.exports = {
     returnTypes: require('./_returnTypes'),
-    isValidToken: require('./_isValidToken'),
-    authGenToken: require('./_authGenToken')
+    generateSessionToken: require('./_generateSessionToken'),
+    verifyGoogleToken: require('./_verifyGoogleToken'),
+    verifySessionToken: require('./_verifySessionToken'),
 };

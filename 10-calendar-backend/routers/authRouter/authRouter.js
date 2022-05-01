@@ -1,18 +1,20 @@
 const { Router } = require('express');
 
 const { 
-    validateLogin,
-    validateNewUser,
-    validateToken 
-} = require('./_authController');
+    controlLoginWithNewUser, 
+    controlLoginWithEmailAndPassword,
+    controlLoginWithGoogleToken,
+    controlLoginWithSessionToken,
+} = require('./_authControllers');
 
 const authRouter = Router();
 /* 
     Routes
     /api/auth
 */
-authRouter.post( '/', validateLogin );
-authRouter.post( '/new', validateNewUser );
-authRouter.get( '/renew', validateToken );
+authRouter.post( '/', controlLoginWithEmailAndPassword );
+authRouter.post( '/new', controlLoginWithNewUser );
+authRouter.get( '/renew', controlLoginWithSessionToken );
+authRouter.get( '/google', controlLoginWithGoogleToken );
 
 module.exports = authRouter;

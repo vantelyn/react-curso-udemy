@@ -1,5 +1,5 @@
 const returnTypes = {
-    getEvents: ( events ) => ({
+    getAllEvents: ( events ) => ({
         status: 200,
         payload: {
             ok: true,
@@ -38,7 +38,7 @@ const returnTypes = {
             msg: 'Event deleted'
         }
     },    
-    badToken: {
+    invalidToken: {
         status: 401,
         payload: {
             ok: false,

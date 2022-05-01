@@ -1,4 +1,5 @@
 module.exports = {
-    dbConnect: require( './_dbConnect' ),
-    dbModels: require( './_dbModels' )
+    Connect: require( './_Connect' ),
+    User: require( './_Models/User' ),
+    Event: require( './_Models/Event' ),
 };

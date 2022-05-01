@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 require('dotenv').config();
-const { dbConnect } = require('./database');
+const database = require('./database');
 const { authRouter, eventsRouter } = require('./routers');
 const { injectResponder, catchBodyParseErrors } = require('./middlewares');
 
@@ -9,7 +9,7 @@ const { injectResponder, catchBodyParseErrors } = require('./middlewares');
 const app = express();
 
 // Base de datos
-dbConnect();
+database.Connect();
 
 // CORS
 app.use( cors() );

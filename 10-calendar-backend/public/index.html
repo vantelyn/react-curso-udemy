@@ -7,9 +7,65 @@
 
     <link rel="stylesheet" href="./styles.css">
 
-    <title>Demo app</title>
+    <title>Google Sign-in</title>
 </head>
 <body>
-    <h1>Noqueado</h1>
+    <h1>Google Sign-in</h1>
+    <hr />
+
+    <div 
+        id="g_id_onload"
+        data-client_id="804037409941-1sq7mjt05244u2mpnmln6kilaofalk6a.apps.googleusercontent.com"
+        data-callback="handleCredentialResponse"
+        data-auto_prompt="false"
+    >
+    </div>
+    <div 
+        class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="rectangular"
+        data-logo_alignment="left"
+    >
+    </div>
+
+    <button id="google_signOut" onclick="handleSignOut()" >
+        Sign Out
+    </button>
+
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            const token = response.credential;
+
+            fetch( 'http://localhost:4000/api/auth/google',{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'g-token': token,
+                }
+            } )
+                .then( resp => resp.json() )
+                .then( resp => {
+                    console.log( resp );
+                    localStorage.setItem( 'email', resp.user.email )
+                } )
+                .catch( console.warn );
+        }
+
+        const handleSignOut = () => {
+            console.log( google.accounts.id );
+            google.accounts.id.disableAutoSelect();
+
+            google.accounts.id.revoke( localStorage.getItem( 'email' ), done => {
+                localStorage.clear();
+                location.reload();
+            } );
+        }
+
+      </script>
 </body>
 </html>

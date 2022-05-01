@@ -1,10 +1,8 @@
 module.exports = {
     checkFormErrors: require('./_checkFormErrors'),
-    checkUserByEmail: require('./_checkUserByEmail'),
-    checkUserCredentials: require('./_checkUserCredentials'),
-    checkIfUserAlreadyExists: require('./_checkIfUserAlreadyExists'),
-    checkTokenAndSaveUser: require('./_checkTokenAndSaveUser'),
-    userLogin: require('./_loginUser'),
-    createNewUser: require('./_createNewUser'),
-    renewToken: require('./_renewToken'),
+    loadUserFromEmailAndPassword: require('./_loadUserFromEmailAndPassword'),
+    loadUserFromSessionToken: require('./_loadUserFromSessionToken'),
+    loadUserFromNewUser: require('./_loadUserFromNewUser'),
+    loadUserFromGoogleToken: require('./_loadUserFromGoogleToken'),
+    userLogin: require('./_userLogin'),
 };

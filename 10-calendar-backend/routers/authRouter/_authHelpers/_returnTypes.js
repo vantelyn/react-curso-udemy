@@ -7,12 +7,13 @@ const returnTypes = {
             errors
         }
     }),
-    userLogin: (token) => ({
+    userLogin: ( token, user ) => ({
         status: 202,
         payload: {
             ok: true,
             msg: 'Session started',
-            token
+            token,
+            user
         }
     }),
     userCreated: (token) => ({
@@ -23,11 +24,11 @@ const returnTypes = {
             token
         }
     }),
-    badToken: {
+    invalidToken: {
         status: 401,
         payload: {
             ok: false,
-            msg: 'Bad Token'
+            msg: 'Invalid Token'
         }
     },
     userAlreadyExists: {
@@ -49,6 +50,13 @@ const returnTypes = {
         payload: {
             ok: false,
             msg: 'Bad user credentials'
+        }
+    },
+    userBanned: {
+        status: 401,
+        payload: {
+            ok: false,
+            msg: 'User Banned'
         }
     },
 }

@@ -1,11 +1,11 @@
-const { request, response } = require("express");
-const { Event } = require("../../../database/_dbModels");
+const { request } = require("express");
+const { Event } = require("../../../database");
 const { returnTypes } = require("../_eventsHelpers");
 
-const createNewEvent = async (req = request, { respond }) => {
+const eventCreateNew = async (req = request, { respond } ) => {
     let newEvent = new Event({
         ...req.body,
-        user: req.uid
+        user: req.user.id
     });
 
     try {
@@ -13,8 +13,8 @@ const createNewEvent = async (req = request, { respond }) => {
         return respond( returnTypes.eventCreated( newEvent ) );
     } catch ( err ) {
         console.log( err );
-        return res.respond( returnTypes.internalServerError );
+        return respond( returnTypes.internalServerError );
     }  
 }
 
-module.exports = createNewEvent;
+module.exports = eventCreateNew;

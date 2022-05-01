@@ -1,0 +1,17 @@
+const { request, response } = require("express");
+const { Event } = require("../../../database");
+const { returnTypes } = require("../_eventsHelpers");
+
+const eventGetAll = async (req = request, { respond } = response) => {
+
+    try {
+        const eventsFound = await Event.find().populate('user', 'name');
+        return respond( returnTypes.getAllEvents( eventsFound ) );
+    } catch ( err ) {
+        console.log( err )
+        return respond( returnTypes.internalServerError );
+    }
+        
+}
+
+module.exports = eventGetAll;

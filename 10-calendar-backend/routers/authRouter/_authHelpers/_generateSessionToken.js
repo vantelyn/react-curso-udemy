@@ -1,8 +1,8 @@
 const { sign } = require("jsonwebtoken");
 
-const authGenToken = ( uid, name ) => {
-    return new Promise( (resolve, reject) => {
-        const payload = { uid, name };
+const generateSessionToken = ( id ) => {
+    return new Promise( ( resolve, reject ) => {
+        const payload = { id };
         const privateKey = process.env.SECRET_JWT_SEED;
         const options = {
             expiresIn: '2h'
@@ -17,4 +17,4 @@ const authGenToken = ( uid, name ) => {
     })
 }
 
-module.exports = authGenToken;
+module.exports = generateSessionToken;

@@ -2,44 +2,43 @@ const { check } = require("express-validator");
 const { isValidDate } = require("./_eventsHelpers");
 const {
     checkFormErrors,
-    checkEventByProvidedId,
-    checkEventOwner,
-    createNewEvent,
-    updateEvent,
-    getEvents,
-    eliminateEvent
+    loadUserFromSessionToken,
+    eventCreateNew,
+    eventUpdate,
+    eventDelete,
+    eventGetAll
 } = require("./_eventsValidators");
 
 
 const controlGetEvents = [
-    getEvents,
+    loadUserFromSessionToken,
+    eventGetAll,
 ];
 
 const controlCreateNewEvent = [
+    loadUserFromSessionToken,
     check("title", "El título es obligatorio").not().isEmpty(),
     check("start", "No es una fecha válida").custom( isValidDate ),
     check("end", "No es una fecha válida").custom( isValidDate ),
     checkFormErrors,
-    createNewEvent,
+    eventCreateNew,
 ];
 
 const controlUpdateEvent = [
+    loadUserFromSessionToken,
     check('id','Id is not valid').isMongoId(),
     check("title", "El título es obligatorio").not().isEmpty(),
     check("start", "No es una fecha válida").custom( isValidDate ),
     check("end", "No es una fecha válida").custom( isValidDate ),
     checkFormErrors,
-    checkEventByProvidedId,
-    checkEventOwner,
-    updateEvent,
+    eventUpdate,
 ];
 
 const controlEliminateEvent = [
+    loadUserFromSessionToken,
     check('id','Id is not valid').isMongoId(),
     checkFormErrors,
-    checkEventByProvidedId,
-    checkEventOwner,
-    eliminateEvent,
+    eventDelete,
 ];
 
 module.exports = {
